@@ -1,79 +1,116 @@
-// prerequire -> javascript , runtime ,
-// NODE JS => not a lanaguge, runtime enviroment,run on server
-// runtime => request ans response from server
-//! RYAN DAHL (original developer of Node js)
+# How to work with Node Js 
 
-// Core javascript run only on browser not server
-// Node js => chrome javascript V8 engine(c++ program) + c++ programs
-// add more feature -> npm package , file system etc
+### prerequire  
+- Basic Knowledge about javascript
 
-//! ======== Project start in nodejs ==========
-// npm init
-    // create package.json file and package.lock.json file
-// npm install <package-name>  --> produnction depencies
-// npm install -D nodemon  -> devDependecies (development dependencies)
+# NODE JS 
+- Node js is not a lanaguge
+- it is runtime enviroment
+- it help to run the server
 
-// each file in nodejs has a module (module.js)
+### runtime
+- request and response from server
 
-//! npm module
-// const package = require('package-name');
+   **RYAN DAHL (original developer of Node js)**
 
-// module has encapsulate like this
+- Core javascript run only on browser not server
+
+```Node js => chrome javascript V8 engine(c++ program) + c++ programs```
+- add more feature -> npm package , file system etc.
+
+## Project start with nodejs 
+
+#### npm init
+    - create **package.json** file and **package.lock.json** file
+    
+    - `npm install <package-name>`  --> produnction dependencies
+    - `npm install -D nodemon`  -> devDependecies (development dependencies)
+
+- each file in nodejs has a module e.g (module.js)
+
+## Impport module in node js
+
+```javascript
+const package = require('package-name');
+```
+
+### module has encapsulate like this
+```javascript
 (function(name) {
     var age = 25
     console.log(name)
 })('yogesh')
+```
 
-// console.log(age) // error
+```console.log(age) // error```
 
-// ===== local module (module.js) file ======
-// const register = require('./auth.js')
-//
-// register('yogesh')
-// login('yogesh','12465465hjvjykjjgdf87')
+## local module (module.js) file 
+```javascript
+ const register = require('./auth.js')
 
+ register('yogesh')
+ login('yogesh','12465465hjvjykjjgdf87')
+ ```
+
+```javascript
 const auth = require('./auth.js')
 
 auth.register('yogesh')
 auth.login('yogesh','127647hjbj268784b7tw')
-
-// create a new file (auth.js)
+```
+## create a new file (/auth.js)
+```javascript
 const register = function(username){
     console.log(`user : ${username} is registered succesfully..`)
 }
 const login = function(username, pass){
     console.log(`user: ${username} has login in and password is ${pass}`)
 }
+ module.exports = register
+ module.exports = login // conflict
+```
 
-// module.exports = register
-// module.exports = login // conflict
+- `module.exports has conflicted to each other when called so we create an objects
 
+```javascript
 // create an object
 module.exports = {
     register : register,
     login : login
 }
+```
 
-// ======= Core Module (inbuilt in nodejs) ============= (module.js) file
+## Core Module (inbuilt in nodejs)
+:file_folder: (/module.js) file
+### Path module
+```javascript
 const path = require('path')
-
-// Dirname
+```
+##### Dirname
+```javascript
 console.log('folder name :', path.dirname(__filename)) // current file's folder name
  // output => user/Desktop/javascript/module.js
-
-// Filename
+```
+##### Filename
+```javascript
 console.log("File name :", path.basename(__filename)) // output => module.js
-// Extension name
+```
+##### Extension name
+```javascript
 console.log("extension name :", path.extname(__filename)) // output => .js
-
-// Join
+```
+##### Join
+```javascript
 console.log("Join :", path.join(__dirname,"order","app.js")) // output => /user/Desktop/javascript/order/app.js
+```
 
-
-// ========== File System ====================
+##File System 
+```javascript
 const fs = require('fs')
+```
 
-// make a directory
+##### make a directory
+```javascript
 // mkdir(path,name,callback)
 fs.mkdir(path.join(__dirname, '/test'),(err) => {
     if(err){
@@ -82,15 +119,17 @@ fs.mkdir(path.join(__dirname, '/test'),(err) => {
     }
     console.log('folder created..')
 })
-// it created folder named (test)
+```
+- it created folder named (test)
 
-// file create
+##### file create
+```javascript
 fs.writeFile(path.join(__dirname,'test','test.txt'),'text inside in test file',(err) => {
     if(err){
         console.log(err);
         // throw err
     }
-    // Append / add data in file
+    // Append /add data in file
     fs.appendFile(path.join(__dirname,'test','test.txt'),'appending more data in test.txt file',(err)=>{
         if(err){
             throw err
@@ -99,8 +138,12 @@ fs.writeFile(path.join(__dirname,'test','test.txt'),'text inside in test file',(
     })
     console.log("file is created...")
 })
+```
 
-// Read file => (readFile(Asynchronous) and readFileSync(Synchronous))
+##### Read file 
+- readFile (Asynchronous)
+- readFileSync (Synchronous)
+```javascript
 fs.readFile(path.join(__dirname,'test','test.txt'),(err,data)=> {
     if(err){
         throw err
@@ -109,15 +152,18 @@ fs.readFile(path.join(__dirname,'test','test.txt'),(err,data)=> {
     const content = Buffer.from(data)
     console.log(content.toString())
 })
-// OR using utf-8
+```
+---------------------------- OR using utf-8 ------------------------
+```javascript
 fs.readFile(path.join(__dirname,'test','test.txt'),'utf-8',(err,data)=> {
     if(err){
         throw err
     }
     console.log(data)
 })
-
-// =======Events module ==========
+```
+## Events module
+```javascript
 const emitter = require('events') // return class emitter
 
 // make object from class
@@ -131,8 +177,10 @@ myemitter.emit('event-name',{
     name : 'yogesh',
     age : 21
 })
+```
 
-// some practical example
+## Some practical example
+```javascript
 class auth extends emitter {
     register(username){
         const.log('register is done..')
@@ -146,10 +194,10 @@ const a = new auth()
 auth.on('registered',(username) => {
     console.log(`${username} is register.`)
 })
+```
 
-
-// ================= Create server (HTTP module) ==========================
-
+## Create server (HTTP module)
+```javascript
 const http = require('http')
 const app = http.createServer((request,response) => {
     response.end('<h1>this string view on web server</h1>')
@@ -164,14 +212,21 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT,() => {
     console.log(`listening server on port ${PORT}`)
 })
+```
 
-// PROBLEM : when we any change in file , we restart tyhe server again and again.
-// so we use Nodemon module => it restart the server automaticaly when changes in file
-// package.json file
+# PROBLEM
+- when we any change in file , we restart the server again and again.
+
+**so we use *Nodemon module* => it restart the server automaticaly when changes in file**
+
+### ReWrite in package.json file
+```json
 "scripts": {
     "start": "node module.js",
     "dev" : "nodemon module.js"
 }
-
-// run with
+``
+## Run the server using command
+```
 npm run dev
+```
