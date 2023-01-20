@@ -1,6 +1,9 @@
-// if use of node js , we have to write more code to handle request and responce from server
-// complex to write a code in node js so use express js
+# How to use Express JS full docs
 
+- if use of node js , we have to write more code to handle request and responce from server
+- complex to write a code in node js so use express js
+
+```javascript
 // import express module
 const express = require('express')
 const path = require('path')
@@ -8,6 +11,7 @@ const path = require('path')
 // create express server(app)
 const app = express()
 const PORT = process.env.PORT || 5000
+```
 
 //! This is static page
 //? get request ( / )
