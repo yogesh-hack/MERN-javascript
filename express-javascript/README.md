@@ -14,7 +14,10 @@ const PORT = process.env.PORT || 5000
 ```
 
 we tell to the express about all static files in which folder i.e **(public)**
-```app.use(express.static('public'))``` // this is built-in middleware function in express
+
+```javascript
+app.use(express.static('public')) // this is built-in middleware function in express
+``` 
 
  ### create a static page
  ```javascript
@@ -41,7 +44,9 @@ console.log(app.get('view engine'));
 by default, it search engine file in views's file.
 
 if we want to change a folder name
-```app.set('views',path.resolve(__dirname) + '/templates');```
+```javascript
+app.set('views',path.resolve(__dirname) + '/templates');
+```
 
 ##### Routing of all template engine (ejs) files
 
