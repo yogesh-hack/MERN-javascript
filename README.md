@@ -1,2 +1,3 @@
-# javascript-begining
-understanding the javascript code for web dveelopment.
+# MERN JavaScript
+MongoDb - Express JS - React JS - Node JS
+
