@@ -23,10 +23,11 @@
 ## Project start with nodejs 
 
 #### npm init
-    - create **package.json** file and **package.lock.json** file
-    
-    - `npm install <package-name>`  --> produnction dependencies
-    - `npm install -D nodemon`  -> devDependecies (development dependencies)
+
+- create **package.json** file and **package.lock.json** file
+
+- `npm install <package-name>`  --> produnction dependencies
+- `npm install -D nodemon`  -> devDependecies (development dependencies)
 
 - each file in nodejs has a module e.g (module.js)
 
