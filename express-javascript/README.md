@@ -89,7 +89,9 @@ app.get('/download',(req,res)=> {
 
 ### more routing in Server file -> complex code so express have a router feature
 - so we create a `routes` folder in which write all file's routes
+
 ![routes](https://user-images.githubusercontent.com/83384315/213654656-0efbb474-bd5f-4a9a-bf09-84cb622768b6.png)
+
 *render all routes from index.js*
 
 ```javascript
@@ -124,13 +126,13 @@ router.get('/download',(req,res)=> {
 # Express MiddleWare 
 
 Client(Request) -> -> -> ->  { Middle of ssomething }   -> -> -> -> Responce ->
+                                    ⇓
             check the (api key valid/ invalid) or (auth is fail/pass) 
 
 ![download](https://user-images.githubusercontent.com/83384315/213655753-39a20e0b-1a4d-4e48-8159-070ff077a0c3.png)
 
 
-
-## We create simple applocation using React and Rest API 
+## We create simple application using React and Rest API 
 - fastest way to use react using **CDN**
 ```html
    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
