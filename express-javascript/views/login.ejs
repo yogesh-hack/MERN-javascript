@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partition/head.ejs');%>
+    <title>
+        <%= title %>
+    </title>
+</head>
+<body>
+    <%- include('../partition/nav.ejs'); %> 
+    <h1>Login</h1>
+    <div class="container">
+        <form action="">
+            <div class="input-group mb-3">
+                <span class="input-group-text">👤</span>
+                <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Username">
+                <label for="floatingInputGroup1">Username</label>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">🔑</span>
+                <div class="form-floating">
+                <input type="password" class="form-control" id="floatingInputGroup1" placeholder="Username">
+                <label for="floatingInputGroup1">Password
+                </label>
+                </div>
+          </div>
+          <button type='submit' class="btn btn-primary">Login</button>
+          </form>
+        <br>
+    </div>
+</body>
+</html>
