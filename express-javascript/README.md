@@ -13,40 +13,75 @@ const app = express()
 const PORT = process.env.PORT || 5000
 ```
 
-//! This is static page
-//? get request ( / )
-    // app.get('/',(request,responce) => {
-    //     // responce.send('<h1>This is Express server</h1>')
-    // //    responce.sendFile(path.resolve(__dirname) + '/index.html')
-    //         responce.render('index', {
-    //             title : 'My Homepage'
-    //         }) //  for template engines
-    // })
+we tell to the express about all static files in which folder i.e **(public)**
+```app.use(express.static('public'))``` // this is built-in middleware function in express
 
-    // // login request (/login)
-    // app.get('/login',(request,responce) => {
-    // //    responce.sendFile(path.resolve(__dirname) + '/login.html')
-    //     responce.render('login', {
-    //         title : 'My Login page'
-    //     })
-    // })
+ ### create a static page
+ ```javascript
+// get request ( / )
+app.get('/',(request,responce) => {
+        responce.send('<h1>This is Express server</h1>')
+        responce.sendFile(path.resolve(__dirname) + '/index.html')
+})
+
+// login request (/login)
+app.get('/login',(request,responce) => {
+    responce.sendFile(path.resolve(__dirname) + '/login.html')
+})
+```
+### create a template enigine pages (ejs)
+For creating a dynamic site => template engine -> (ejs) or (pug)
+installing :  `npm install ejs`
+
+Tell to express , we use template engine(ejs)
+```javascript
+app.set('view engine','ejs')
+console.log(app.get('view engine'));
+```
+by default, it search engine file in views's file.
+
+if we want to change a folder name
+```app.set('views',path.resolve(__dirname) + '/templates');```
+
+##### Routing of all template engine (ejs) files
+
+```javascript
+app.get('/',(request,responce) => {
+         responce.render('index', {
+            title : 'My Homepage'
+         }) //  for template engines
+ })
+
+// login request (/login)
+app.get('/login',(request,responce) => {
+    responce.sendFile(path.resolve(__dirname) + '/login.html')
+    responce.render('login', {
+         title : 'My Login page' 
+    })
+})
+```
+
+### For downlaod any files gave best way by express -> **Use Download method**
+```javascript
+app.get('/download',(req,res)=> {
+    res.download(path.resolve(__dirname) + '/public/login.html');
+})
+```
 
 
-    //* more routing -> complex code so express give router feature
-// app.get('/download',(req,res)=> {
-//     res.download(path.resolve(__dirname) + '/public/login.html');
-// })
-//! we tell to the express about all static files in which folder i.e (public)
-app.use(express.static('public')) // this is built-in middleware function in express
+### more routing -> complex code so express have a router feature
+*render all routes from index.js*
 
-// render all routes from index.js
-const mainrouter = require('./routes/index')
-const productrouter = require('./routes/products')
-const Errorhandler = require('./errors/Errorhandler')
-app.use(mainrouter)
-app.use(productrouter)
+```javascript
+    const mainrouter = require('./routes/index')
+    const productrouter = require('./routes/products')
+    const Errorhandler = require('./errors/Errorhandler')
+    
+    app.use(mainrouter)
+    app.use(productrouter)
+```
 
-//* ======= Error handing in express js ================
+## Error handing in express js
 // 404 error
 app.use((req,res,next) => {
     return (
@@ -76,17 +111,6 @@ app.use((err,req,res,next) => {
     // res.json({message:err.message})
     // next()
 })
-
-//! For creating a dynamic site => template engine -> (ejs) or (pug)
-// installing  :  npm install ejs
-
-//! Tell to express , we use template engine(ejs)
-app.set('view engine','ejs')
-// console.log(app.get('view engine'));
-
-// by default, it search engine file in views's file.
-//! if we want to change a folder name
-// app.set('views',path.resolve(__dirname) + '/templates');
 
 
 app.listen(PORT,() => {
