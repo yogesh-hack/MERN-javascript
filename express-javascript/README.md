@@ -3,6 +3,10 @@
 - if use of node js , we have to write more code to handle request and responce from server
 - complex to write a code in node js so use express js
 
+#### File paths structure look like..
+
+![path](https://user-images.githubusercontent.com/83384315/213653431-6df12044-319a-4313-94a2-0fbf37294932.png)
+
 ```javascript
 // import express module
 const express = require('express')
