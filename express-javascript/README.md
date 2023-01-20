@@ -93,7 +93,7 @@ app.get('/download',(req,res)=> {
 ![routes](https://user-images.githubusercontent.com/83384315/213654656-0efbb474-bd5f-4a9a-bf09-84cb622768b6.png)
 
 *render all routes from index.js*
-
+:open_file_folder: **express.js**(server file)
 ```javascript
     const mainrouter = require('./routes/index')
     const productrouter = require('./routes/products')
@@ -101,7 +101,8 @@ app.get('/download',(req,res)=> {
     app.use(mainrouter)
     app.use(productrouter)
 ```
-**routes/index.js**
+:open_file_folder: **routes/index.js**
+
 ```javascript
  // import express to Router method
 const router = require('express').Router();
@@ -144,7 +145,7 @@ Client(Request) -> -> -> ->  { Middle of ssomething }   -> -> -> -> Responce ->
 ```html
  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 ```
-##### Complete code of `views/products.ejs`
+##### Complete code of :open_file_folder: `views/products.ejs`
 ```ejs
 <!DOCTYPE html>
 <html lang="en">
@@ -365,7 +366,7 @@ function apikey(req,res,next){
 
 module.exports = apikey
  
- 
+ :open_file_folder:
 ## Error handing in express js
 ```javascript
 const Errorhandler = require('./errors/Errorhandler')
