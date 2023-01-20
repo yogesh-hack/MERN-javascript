@@ -177,7 +177,6 @@ Client(Request) -> -> -> ->  { Middle of ssomething }   -> -> -> -> Responce ->
 
 const apikeymiddleware = require('../middleware/api');
 
-
 // router.get('/api/products',apikeymiddleware,(req,res)=> {
 //    res.json([
 //     {
@@ -195,7 +194,8 @@ const apikeymiddleware = require('../middleware/api');
 module.exports = router
 
 
-
+:open_file_folder: **routes/products.js**
+```javascript
 const router = require('express').Router();
 const Errorhandler = require('../errors/Errorhandler');
 const apikey = require('../middleware/api');
@@ -210,8 +210,11 @@ router.get('/products', (req,res) => {
 router.get('/api/products', (req,res) => {
     res.json(products)
 })
+```
 
-//! ========= POST methods use =================
+### How to POST method work in express JS
+:open_file_folder: **routes/products.js**
+```javascript
 router.post('/api/products',apikey, (req,res,next) => {
     
     const { name,price } = req.body;
@@ -234,11 +237,12 @@ router.delete('/api/products/:productId', (req,res) => {
 })
 
 module.exports = router
-
-// we do initialized the react
-
-//? create components
-//! JSX (react file) which does not understand by browser -> it gave error
+```
+- we do initialized the react
+**create components**
+- JSX (react file) which does not understand by browser -> it gave error
+:open_file_folder: **public/js/app.js**
+```javascript
 const App = () => {
     const [products, setproducts] = React.useState([]);
     //! create state for form
@@ -343,11 +347,13 @@ const App = () => {
     </>
     )
 }
-//! We compiled JSX into JS by (babel standalone) Tool
 ReactDOM.render(<App/>, document.getElementById('app'))
-<!-- Middleware -->
+```
+## Rest API 
 
-// create a api middleware function
+- create a api middleware function
+:open_file_folder: **middleware/api.js**
+```javascript
 function apikey(req,res,next){
     const api_key = '1234567';
    // console.log(req.body)
@@ -365,19 +371,23 @@ function apikey(req,res,next){
 
 
 module.exports = apikey
- 
- :open_file_folder:
+```
+
 ## Error handing in express js
+:open_file_folder: **express.js**
 ```javascript
 const Errorhandler = require('./errors/Errorhandler')
 // 404 error
 app.use((req,res,next) => {
     return (
-        //res.json({message : 'Page not found!'})
+        res.json({message : 'Page not found!'})
         res.render('error')
     )
 })
-// middleware expres for error handling
+```
+
+#### middleware expres for error handling
+```javascript
 app.use((err,req,res,next) => {
 
     if( err instanceof Errorhandler){
