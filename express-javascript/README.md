@@ -16,6 +16,14 @@ const path = require('path')
 const app = express()
 const PORT = process.env.PORT || 5000
 ```
+**To listen the server wth PORT Number with default 5000**
+```http://localhost:5000/```
+
+```javascript
+app.listen(PORT,() => {
+    console.log(`Listening server on ${PORT}`)
+})
+```
 
 we tell to the express about all static files in which folder i.e **(public)**
 
@@ -45,14 +53,15 @@ Tell to express , we use template engine(ejs)
 app.set('view engine','ejs')
 console.log(app.get('view engine'));
 ```
-by default, it search engine file in views's file.
+by default, it search templates engine file in views's folder.
 
 if we want to change a folder name
 ```javascript
 app.set('views',path.resolve(__dirname) + '/templates');
 ```
 
-##### Routing of all template engine (ejs) files
+### Apply Routing of all template engine (ejs) files
+- gave title dynamically
 
 ```javascript
 app.get('/',(request,responce) => {
@@ -78,62 +87,63 @@ app.get('/download',(req,res)=> {
 ```
 
 
-### more routing -> complex code so express have a router feature
+### more routing in Server file -> complex code so express have a router feature
+- so we create a `routes` folder in which write all file's routes
+![routes](https://user-images.githubusercontent.com/83384315/213654656-0efbb474-bd5f-4a9a-bf09-84cb622768b6.png)
 *render all routes from index.js*
 
 ```javascript
     const mainrouter = require('./routes/index')
     const productrouter = require('./routes/products')
-    const Errorhandler = require('./errors/Errorhandler')
     
     app.use(mainrouter)
     app.use(productrouter)
 ```
+**routes/index.js**
+```javascript
+ // import express to Router method
+const router = require('express').Router();
 
-## Error handing in express js
-// 404 error
-app.use((req,res,next) => {
-    return (
-        //res.json({message : 'Page not found!'})
-        res.render('error')
-    )
-})
-// middleware expres for error handling
-app.use((err,req,res,next) => {
-
-    if( err instanceof Errorhandler){
-        res.status(err.status).json({
-            error: {
-                message : err.message,
-                status : err.status
-            }
-        })
-    }else{
-        res.status(500).json({
-            error: {
-                message : err.message,
-                status : err.status
-            }
-        })
-    }
-    console.log('Error :',err.message)
-    // res.json({message:err.message})
-    // next()
+router.get('/', (req,res) => {
+    res.render('index', {
+        title : 'My HomePage'
+    })
 })
 
-
-app.listen(PORT,() => {
-    console.log(`Listening server on ${PORT}`)
+router.get('/login',(req,res) => {
+    res.render('login', {
+        title : 'My Login page'
+    })
 })
 
+router.get('/download',(req,res)=> {
+    res.download(path.resolve(__dirname) + '/public/login.html');
+})
+```
 
-// ============ Express MiddleWare =====================
-//! Client(Request) -> -> -> ->  { Middle of ssomething }   -> -> -> -> Responce ->
-//?            check the (api key valid/ invalid) or (auth is fail/pass) 
+# Express MiddleWare 
+
+Client(Request) -> -> -> ->  { Middle of ssomething }   -> -> -> -> Responce ->
+            check the (api key valid/ invalid) or (auth is fail/pass) 
+
+![download](https://user-images.githubusercontent.com/83384315/213655753-39a20e0b-1a4d-4e48-8159-070ff077a0c3.png)
 
 
 
+## We create simple applocation using React and Rest API 
+- fastest way to use react using **CDN**
+```html
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+```
 
+- the extension of react js is **JSX** which does not understand by browser while using *react CDN*
+- so we have use to compile from JSX into JS from **Babel** tool
+```html
+ <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+```
+##### Complete code of `views/products.ejs`
+```ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -151,38 +161,20 @@ app.listen(PORT,() => {
     <div id="app"></div>
    </div>
 
-   <!-- fastest way to use react using CDN -->
    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+     
    <!-- Babel JSX into Js for compilation -->
    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
    <!-- react components -->
    <script type="text/babel" src="/js/app.js"></script>
 </body>
 </html>
-
-
-
+```
 
 const apikeymiddleware = require('../middleware/api');
 
-// import express to Router method
-const router = require('express').Router();
-router.get('/', (req,res) => {
-    res.render('index', {
-        title : 'My HomePage'
-    })
-})
 
-router.get('/login',(req,res) => {
-    res.render('login', {
-        title : 'My Login page'
-    })
-})
-
-router.get('/download',(req,res)=> {
-    res.download(path.resolve(__dirname) + '/public/login.html');
-})
 // router.get('/api/products',apikeymiddleware,(req,res)=> {
 //    res.json([
 //     {
@@ -370,3 +362,38 @@ function apikey(req,res,next){
 
 
 module.exports = apikey
+ 
+ 
+## Error handing in express js
+```javascript
+const Errorhandler = require('./errors/Errorhandler')
+// 404 error
+app.use((req,res,next) => {
+    return (
+        //res.json({message : 'Page not found!'})
+        res.render('error')
+    )
+})
+// middleware expres for error handling
+app.use((err,req,res,next) => {
+
+    if( err instanceof Errorhandler){
+        res.status(err.status).json({
+            error: {
+                message : err.message,
+                status : err.status
+            }
+        })
+    }else{
+        res.status(500).json({
+            error: {
+                message : err.message,
+                status : err.status
+            }
+        })
+    }
+    console.log('Error :',err.message)
+    // res.json({message:err.message})
+    // next()
+})
+```
