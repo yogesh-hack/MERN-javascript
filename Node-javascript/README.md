@@ -107,7 +107,7 @@ console.log("extension name :", path.extname(__filename)) // output => .js
 console.log("Join :", path.join(__dirname,"order","app.js")) // output => /user/Desktop/javascript/order/app.js
 ```
 
-##File System 
+## File System 
 ```javascript
 const fs = require('fs')
 ```
@@ -228,7 +228,7 @@ app.listen(PORT,() => {
     "start": "node module.js",
     "dev" : "nodemon module.js"
 }
-``
+```
 ## Run the server using command
 ```
 npm run dev
