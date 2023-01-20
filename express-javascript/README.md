@@ -3,6 +3,9 @@
 - if use of node js , we have to write more code to handle request and responce from server
 - complex to write a code in node js so use express js
 
+## Preview project look
+![2023-01-20](https://user-images.githubusercontent.com/83384315/213661717-752a6cad-f4f2-44e9-843e-8eecc883251a.png)
+
 #### File paths structure look like..
 
 ![path](https://user-images.githubusercontent.com/83384315/213653431-6df12044-319a-4313-94a2-0fbf37294932.png)
