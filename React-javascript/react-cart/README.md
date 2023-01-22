@@ -283,6 +283,8 @@ useEffect(() => {
 ## props by fetch api
 import React from 'react'
 
+<img src="https://img.freepik.com/free-photo/cocktail-mini-triangle-samosa-made-using-patti-strip-popular-home-made-snack-from-india_466689-90745.jpg?size=626&ext=jpg&ga=GA1.2.1657290272.1674280175&semt=sph" alt="list"></img>
+```js
 const ProductList = (props) => {
   console.log(props)
   return (
@@ -301,3 +303,4 @@ const ProductList = (props) => {
 }
 
 export default ProductList
+```
