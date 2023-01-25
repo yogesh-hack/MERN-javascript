@@ -2,7 +2,7 @@
 
 ## Syncronous function vs Asyncronous function
 
-**Example : **
+**Example:**
 ```js
 console.log("start")
 
@@ -13,7 +13,7 @@ Its run one by one i.e firstly run start and then end function
 
 ### we want to log after some times but those does not block other code
 
-**Example : **
+**Example:**
 ```js
 setTimeout(function() {
     console.log("set timer for asysnchnous....")
@@ -22,7 +22,7 @@ setTimeout(function() {
 console.log("after asysnchnous")
 ```
  - setTimeout function is predefine fuction , it used to run code after some time
- - this function is calles **Asynchronous funciton**
+ - this function is called **Asynchronous funciton**
 
 
 ## Promise
